@@ -1,0 +1,16 @@
+version: "3"
+services:
+  frontend:
+    build:
+      dockerfile: Dockerfile.prod
+    image: svelte-prod
+    container_name: settlements-sveltekit-prod
+    command: npm run dev -- --host  --open
+  backend:
+    build: 
+      dockerfile: Dockerfile.prod
+    image: fastapi-prod
+    container_name: settlements-fastapi-prod
+    command: uvicorn run:app --host 0.0.0.0 --port 80
+  db:
+    container_name: settlements-neo4j-prod

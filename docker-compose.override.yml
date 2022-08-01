@@ -1,0 +1,21 @@
+version: "3"
+services:
+  frontend:
+    build:
+      dockerfile: Dockerfile
+    image: sveltekit
+    container_name: settlements-sveltekit
+    command: npm run dev -- --host --open
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+      - ./frontend/static:/usr/src/app/static
+  backend:
+    build: 
+      dockerfile: Dockerfile
+    image: fastapi-base
+    container_name: settlements-fastapi
+    command: /bin/sh -c "/entrypoint.sh"
+    volumes:
+      - ./backend:/app
+  db:
+    container_name: settlements-neo4j
