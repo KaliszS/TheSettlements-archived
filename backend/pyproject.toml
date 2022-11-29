@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = "The Settlements multiplayer strategy game"
+authors = ["Sebastian Kalisz <sk.kaliszs@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = "~0.20.0"
+fastapi = "~0.88.0"
+pydantic = {extras = ["email"], version = "~1.10.2"}
+motor = "~3.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
