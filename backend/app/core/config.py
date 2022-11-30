@@ -1,9 +1,20 @@
-from typing import Optional
+import os
 
+from dotenv import load_dotenv, find_dotenv
 from pydantic import BaseSettings, AnyHttpUrl, validator
 
 class Settings(BaseSettings):
+    env_loc = find_dotenv(".env")
+    load_dotenv(env_loc)
+
     API_V1_STR: str = "/api/v1"
+    API_V_LATEST_STR: str = API_V1_STR
+
+    JWT_SECRET: str = os.environ.get("JWT_SECRET")
+    ALGORITHM: str = os.environ.get("ALGORITHM")
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES"))
+
+    # e.g: ["http://localhost", "http://localhost:8080"]
     BACKEND_CORS_ORIGINS: list[AnyHttpUrl] = []
 
     @validator("BACKEND_CORS_ORIGINS", pre=True)
@@ -17,8 +28,8 @@ class Settings(BaseSettings):
     class Config:
         case_sensitive = True
 
-    MONGODB_DATABASE_URI: Optional[str] = "db"
-    PORT: Optional[int] = 27017
-    DATABASE_NAME: Optional[str] = "thesettlements"
+    MONGODB_DATABASE_URI: str | None = "db"
+    PORT: int | None = int(os.environ.get("MONGO_PORT"))
+    DATABASE_NAME: str | None = os.environ.get("DATABASE_NAME")
 
 settings = Settings()

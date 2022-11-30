@@ -19,7 +19,7 @@ root_router = APIRouter()
 #     response.headers["X-Process-Time"] = str(process_time)
 #     return 
 
-app.include_router(api_router, prefix=settings.API_V1_STR)
+app.include_router(api_router, prefix=settings.API_V_LATEST_STR)
 app.include_router(root_router)
 
 
