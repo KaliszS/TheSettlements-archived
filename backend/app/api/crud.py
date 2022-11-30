@@ -11,7 +11,7 @@ async def create(model_in, collection):
     
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=model_out)
 
-async def read_all(collection, skip, limit):
+async def read_all(collection, skip=0, limit=100):
     results = await collection.find().skip(skip).to_list(limit)
     
     exceptions.collection_not_found(collection, results)

@@ -6,7 +6,7 @@ from jose import jwt
 
 from app.core.config import settings
 from app.core.security import verify_password
-from app.schemas.user import User
+from app.schemas.user import User, UserInDB
 
 
 JWTPayloadMapping = MutableMapping[str, datetime | bool | str | list[str] | list[int]]
@@ -14,8 +14,8 @@ JWTPayloadMapping = MutableMapping[str, datetime | bool | str | list[str] | list
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V_LATEST_STR}/auth/login")
 
 
-def authenticate(username: str, password: str, collection) -> User | None:
-    user = collection.find_one({"username": username})
+async def authenticate(username: str, password: str, collection) -> User | None:
+    user: UserInDB = await collection.find_one({"username": username})
     if not user:
         return None
     if not verify_password(password, user["hashed_password"]):

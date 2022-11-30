@@ -12,7 +12,7 @@ class Settings(BaseSettings):
 
     JWT_SECRET: str = os.environ.get("JWT_SECRET")
     ALGORITHM: str = os.environ.get("ALGORITHM")
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES"))
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60*24
 
     # e.g: ["http://localhost", "http://localhost:8080"]
     BACKEND_CORS_ORIGINS: list[AnyHttpUrl] = []
