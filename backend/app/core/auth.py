@@ -15,7 +15,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V_LATEST_STR}/auth
 
 
 async def authenticate(username: str, password: str, collection) -> User | None:
-    user: UserInDB = await collection.find_one({"username": username})
+    user = await collection.find_one({"username": username})
     if not user:
         return None
     if not verify_password(password, user["hashed_password"]):

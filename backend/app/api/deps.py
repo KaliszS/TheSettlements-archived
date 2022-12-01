@@ -16,7 +16,7 @@ def getCollection(fileObject):
 
     return db[collectionName]
 
-def get_current_user(collection, token: str = oauth2_scheme) -> User:
+async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -32,7 +32,7 @@ def get_current_user(collection, token: str = oauth2_scheme) -> User:
     except JWTError:
         raise credentials_exception
 
-    user = collection.find_one({"username": token_data.username})
+    user = await db["user"].find_one({"username": token_data.username})
     if user is None:
         raise credentials_exception
     

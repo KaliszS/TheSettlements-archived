@@ -35,13 +35,12 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
     return {
-        "access_token": create_access_token(sub=user["_id"]),
+        "access_token": create_access_token(sub=user["username"]),
         "token_type": "bearer",
     }
 
 @router.get("/me", response_model=schemas.User)
-async def read_users_me():  
-    current_user = deps.get_current_user(collection=collection)
+async def read_users_me(current_user: schemas.User = Depends(deps.get_current_user)): 
     return current_user
 
 @router.get("/users", response_model=list[schemas.User])
