@@ -1,8 +1,8 @@
 import os
 
-def getFileName(fileObject):
+def get_filename(fileObject):
     path = os.path.basename(fileObject)
-    fullFilenameTuple = os.path.splitext(path)
-    filename = fullFilenameTuple[0]
+    full_filename_tuple = os.path.splitext(path)
+    filename = full_filename_tuple [0]
 
     return filename

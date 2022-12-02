@@ -1,13 +1,21 @@
-import time
-
-from fastapi import FastAPI, APIRouter, Request
+from fastapi import FastAPI, APIRouter
 
 from app.core.config import settings
+from app.db.session import db
 from app.api.api_v1.api import api_router
 
 app = FastAPI(
     title="The Settlements API"
 )
+
+@app.on_event("startup")
+def startup_event():
+    db.connect(settings.MONGODB_DATABASE_URI, settings.PORT)
+    db.get_database(settings.MONGO_DATABASE_NAME)
+
+@app.on_event("shutdown")
+def shutdown_event():
+    db.close()
 
 root_router = APIRouter()
 

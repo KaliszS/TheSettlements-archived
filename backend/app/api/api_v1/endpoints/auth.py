@@ -5,12 +5,13 @@ from fastapi.responses import JSONResponse
 
 from app.core.security import get_password_hash
 from app.core.auth import authenticate, create_access_token
-from app.db.session import db
+#from app.db.session import db
 from app.api import deps, crud
 from app import schemas
 
+#db = deps.get_database()
 router = APIRouter()
-collection = db["user"]
+collection = deps.get_db()["user"]
 
 @router.post("/signup", response_model=schemas.User)
 async def create_user(user_in: schemas.UserCreate):

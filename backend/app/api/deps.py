@@ -1,6 +1,7 @@
 from fastapi import Depends, HTTPException, status
 from jose import jwt, JWTError
 from pydantic import BaseModel
+from motor.motor_asyncio import AsyncIOMotorClient
 
 from app.core.auth import oauth2_scheme
 from app.core.config import settings
@@ -11,10 +12,12 @@ from app.utils import filename
 class TokenData(BaseModel):
     username: str | None = None
 
-def getCollection(fileObject):
-    collectionName = filename.getFileName(fileObject)
+def get_collection(fileObject):
+    collection_name = filename.get_filename(fileObject)
+    return db.client.database[collection_name]
 
-    return db[collectionName]
+def get_db():
+    return db.client.database
 
 async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
     credentials_exception = HTTPException(

@@ -30,6 +30,6 @@ class Settings(BaseSettings):
 
     MONGODB_DATABASE_URI: str | None = "db"
     PORT: int | None = int(os.environ.get("MONGO_PORT"))
-    DATABASE_NAME: str | None = os.environ.get("DATABASE_NAME")
+    MONGO_DATABASE_NAME: str | None = os.environ.get("DATABASE_NAME")
 
 settings = Settings()
