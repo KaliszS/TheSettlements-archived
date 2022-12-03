@@ -5,13 +5,11 @@ from fastapi.responses import JSONResponse
 
 from app.core.security import get_password_hash
 from app.core.auth import authenticate, create_access_token
-#from app.db.session import db
-from app.api import deps, crud
+from app.api import crud, dependencies
 from app import schemas
 
-#db = deps.get_database()
 router = APIRouter()
-collection = deps.get_db()["user"]
+collection = dependencies.get_db()["user"]
 
 @router.post("/signup", response_model=schemas.User)
 async def create_user(user_in: schemas.UserCreate):
@@ -41,7 +39,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     }
 
 @router.get("/me", response_model=schemas.User)
-async def read_users_me(current_user: schemas.User = Depends(deps.get_current_user)): 
+async def read_users_me(current_user: schemas.User = Depends(dependencies.get_current_user)): 
     return current_user
 
 @router.get("/users", response_model=list[schemas.User])

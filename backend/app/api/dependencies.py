@@ -14,7 +14,7 @@ class TokenData(BaseModel):
 
 def get_collection(fileObject):
     collection_name = filename.get_filename(fileObject)
-    return db.client.database[collection_name]
+    return get_db()[collection_name]
 
 def get_db():
     return db.client.database
@@ -35,7 +35,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
     except JWTError:
         raise credentials_exception
 
-    user = await db["user"].find_one({"username": token_data.username})
+    user = await get_db()["user"].find_one({"username": token_data.username})
     if user is None:
         raise credentials_exception
     

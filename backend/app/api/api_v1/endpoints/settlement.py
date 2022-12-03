@@ -1,43 +1,37 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Depends
 
-from app.api import deps, crud
+from app.api import crud, dependencies
 from app import schemas
 
 router = APIRouter()
-collection = deps.get_collection(__file__)
+collection = dependencies.get_collection(__file__)
 
 # current_user: deps.CurrentUser = deps.get_current_active_user(),
 
 # <----------------- POST ----------------->
 @router.post("/", response_model=schemas.Settlement)
 async def create_settlement(model_in: schemas.Settlement):
-    model_out = await crud.create(model_in, collection)
-    return model_out
+    return await crud.create(model_in, collection)
 
 # <----------------- GET ----------------->
 @router.get("/", response_model=list[schemas.Settlement])
 async def read_all_settlements(skip: int = Query(0, ge=0), limit: int = Query(100, ge=0)):
-    results = await crud.read_all(collection, skip, limit)
-    return results
+    return await crud.read_all(collection, skip, limit)
 
 @router.get("/{id}", response_model=schemas.Settlement)
 async def read_settlement_by_id(id: str):
-    model_out = await crud.read_by_id(id, collection)
-    return model_out
+    return await crud.read_by_id(id, collection)
 
 # <----------------- PUT ----------------->
 @router.put("/{id}", response_model=schemas.Settlement)
 async def update_settlement(id: str, model_in: schemas.SettlementUpdate):
-    model_out = await crud.update(id, model_in, collection)
-    return model_out
+    return await crud.update(id, model_in, collection)
 
 # <----------------- DELETE ----------------->
 @router.delete("/")
 async def delete_all_settlements():
-    result = await crud.delete_all(collection)
-    return result
+    return await crud.delete_all(collection)
 
 @router.delete("/{id}")
 async def delete_settlement(id: str):
-    result = await crud.delete(id, collection)
-    return result
+    return await crud.delete(id, collection)
