@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Query, Depends
 
-from app.api import crud, dependencies
+from app.api import crud, dependencies as deps
 from app import schemas
 
 router = APIRouter()
-collection = dependencies.get_collection(__file__)
+collection = deps.get_collection(__file__)
 
 # current_user: deps.CurrentUser = deps.get_current_active_user(),
 
