@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 
 from app.core.security import get_password_hash
 from app.core.auth import authenticate, create_access_token
-from app.api import crud, dependencies as deps
+from app.api import dependencies as deps
 from app import schemas
 
 router = APIRouter()
@@ -41,13 +41,3 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
 @router.get("/me", response_model=schemas.User)
 async def read_users_me(current_user: schemas.User = Depends(deps.get_current_user)): 
     return current_user
-
-@router.get("/users", response_model=list[schemas.User])
-async def read_all_users():
-    users = await crud.read_all(collection=collection)
-    return users
-
-@router.delete("/users")
-async def delete_all_users():
-    delete_result = await crud.delete_all(collection=collection)
-    return delete_result
