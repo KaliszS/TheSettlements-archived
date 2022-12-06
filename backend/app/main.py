@@ -2,7 +2,7 @@ from fastapi import FastAPI, APIRouter
 
 from app.core.config import settings
 from app.db.session import db
-from app.api.api_v1.api import api_router
+from app.api.api_v1.api import api_router, auth_router
 
 app = FastAPI(
     title="The Settlements API"
@@ -19,6 +19,7 @@ def shutdown_event():
 
 root_router = APIRouter()
 
+app.include_router(auth_router, prefix=settings.API_V_LATEST_STR)
 app.include_router(api_router, prefix=settings.API_V_LATEST_STR)
 app.include_router(root_router)
 
