@@ -5,8 +5,8 @@ from app.utils.mongo_utils import PyObjectId
 
 class User(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
-    username: str = Field(...)
-    email: EmailStr = Field(...)
+    username: str
+    email: EmailStr
     is_superuser: bool = False
 
     class Config:
