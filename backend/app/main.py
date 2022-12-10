@@ -10,7 +10,7 @@ app = FastAPI(
 
 @app.on_event("startup")
 def startup_event():
-    db.connect(settings.MONGODB_DATABASE_URI, settings.PORT)
+    db.connect(settings.MONGODB_DATABASE_URI, settings.MONGO_PORT)
     db.get_database(settings.MONGO_DATABASE_NAME)
 
 @app.on_event("shutdown")

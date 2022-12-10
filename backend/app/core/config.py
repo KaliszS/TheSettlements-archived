@@ -28,8 +28,14 @@ class Settings(BaseSettings):
     class Config:
         case_sensitive = True
 
-    MONGODB_DATABASE_URI: str | None = "db"
-    PORT: int | None = int(os.environ.get("MONGO_PORT"))
-    MONGO_DATABASE_NAME: str | None = os.environ.get("DATABASE_NAME")
+    if os.environ.get("MONGODB_PORT") and os.environ.get("MONGO_DATABASE_NAME"):
+        MONGODB_DATABASE_URI: str | None = "db"
+        MONGO_PORT: int | None = int(os.environ.get("MONGO_PORT"))
+        MONGO_DATABASE_NAME: str | None = os.environ.get("MONGO_DATABASE_NAME")
+
+    if os.environ.get("NEO4J_USER") and os.environ.get("NEO4J_PASSWORD"):
+        NEO4J_DATABASE_URI: str | None = "neo4j://db:7687"
+        NEO4J_USER: str | None = os.environ.get("NEO4J_USER")
+        NEO4J_PASSWORD: str | None = os.environ.get("NEO4J_PASSWORD")
 
 settings = Settings()

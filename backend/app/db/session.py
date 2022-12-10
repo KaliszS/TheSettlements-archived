@@ -1,6 +1,5 @@
-import logging
-
 from motor.motor_asyncio import AsyncIOMotorClient
+from neo4j import GraphDatabase
 
 from app.core.config import settings
 class MongoDataBase:
@@ -19,5 +18,24 @@ class MongoDataBase:
         self.database = database_name
 
 db = MongoDataBase()
-db.connect(settings.MONGODB_DATABASE_URI, settings.PORT)
+db.connect(settings.MONGODB_DATABASE_URI, settings.MONGO_PORT)
 db.get_database(settings.MONGO_DATABASE_NAME)
+
+class Neo4jDataBase:
+    def __init__(self, driver = None):
+        self.driver = driver
+
+    def connect(self, database_uri: str = None, user: str = None, password: str = None):
+        self.driver = GraphDatabase.driver(database_uri, auth=(user, password))
+
+    def close(self):
+        self.driver.close()
+
+    def open_session(self, cypher: str = None):
+        with self.driver.session() as session:
+            result = session.run(query=cypher)
+
+        return result
+
+# db = Neo4jDataBase()
+# db.connect(settings.NEO4J_DATABASE_URI, settings.NEO4J_USER, settings.NEO4J_PASSWORD)
