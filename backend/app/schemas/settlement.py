@@ -9,7 +9,7 @@ class Settlement(BaseModel):
     x: int
     y: int
     population: int
-    owner: str
+    owner: PyObjectId | None = Field(default_factory=PyObjectId)
        
     class Config:
         allow_population_by_field_name = True
@@ -28,7 +28,7 @@ class Settlement(BaseModel):
 class SettlementUpdate(BaseModel):
     name: str | None
     population: int | None
-    owner: str | None
+    owner: PyObjectId | None
 
     class Config:
         schema_extra = {
