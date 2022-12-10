@@ -28,8 +28,8 @@ class Settings(BaseSettings):
     class Config:
         case_sensitive = True
 
-    if os.environ.get("MONGODB_PORT") and os.environ.get("MONGO_DATABASE_NAME"):
-        MONGODB_DATABASE_URI: str | None = "db"
+    if os.environ.get("MONGO_PORT") and os.environ.get("MONGO_DATABASE_NAME"):
+        MONGO_DATABASE_URI: str | None = "db"
         MONGO_PORT: int | None = int(os.environ.get("MONGO_PORT"))
         MONGO_DATABASE_NAME: str | None = os.environ.get("MONGO_DATABASE_NAME")
 

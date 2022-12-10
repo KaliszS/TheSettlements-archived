@@ -18,7 +18,7 @@ class MongoDataBase:
         self.database = database_name
 
 db = MongoDataBase()
-db.connect(settings.MONGODB_DATABASE_URI, settings.MONGO_PORT)
+db.connect(settings.MONGO_DATABASE_URI, settings.MONGO_PORT)
 db.get_database(settings.MONGO_DATABASE_NAME)
 
 class Neo4jDataBase:
