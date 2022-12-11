@@ -2,13 +2,15 @@ from pydantic import BaseModel, Field
 from bson import ObjectId
 
 from app.utils.mongo_utils import PyObjectId
+from app.schemas.structure import Structure
 
 class Settlement(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     name: str
     x: int
     y: int
-    population: int
+    population: int = 100
+    structures: list[Structure] = []
     owner: PyObjectId | None = Field(default_factory=PyObjectId)
        
     class Config:
