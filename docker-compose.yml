@@ -13,31 +13,26 @@ services:
     #     volumes:
     #         - ./frontend:/app
     #     depends_on:
-    #         - backend
-    backend:
+    #         - api
+    api:
         build: 
-            context: ./backend
+            context: ./thesettlements-api
             dockerfile: Dockerfile
-        image: fastapi-settlements
-        container_name: settlements-fastapi
+        image: thesettlements-backend
+        container_name: "The Settlements API"
         command: uvicorn app.main:app --host 0.0.0.0 --port 80 --reload
         ports:
             - "8001:80"
         volumes:
-            - ./backend/app:/code/app
+            - ./thesettlements-api/app:/api/app
         depends_on:
             - db
     db:
-        image: mongo:latest
-        container_name: settlements-mongo
+        image: neo4j:latest
+        container_name: "The Settlements DB"
         ports:
-            - "27017:27017"
-    # db:
-    #     image: neo4j:latest
-    #     container_name: settlements-neo4j
-    #     ports:
-    #         - "7474:7474"
-    #         - "7687:7687"
-    #     environment:
-    #         - NEO4J_AUTH=${USER}/${PASSWORD}
+            - "7474:7474"
+            - "7687:7687"
+        environment:
+            - NEO4J_AUTH=${USER}/${PASSWORD}
         

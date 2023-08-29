@@ -1,0 +1,18 @@
+### PyCharm ###
+.idea/
+
+### VSCode ###
+.vscode/
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Environment variables
+.env
