@@ -1,4 +1,8 @@
-FROM python:3.11 as requirements
+FROM python:3.11 as build
+
+RUN apt-get update -y
+RUN apt-get clean -y
+RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp
 
@@ -12,6 +16,6 @@ FROM python:3.11-slim
 
 WORKDIR /api
 
-COPY --from=requirements /tmp/requirements.txt /api/requirements.txt
+COPY --from=build /tmp/requirements.txt /api/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /api/requirements.txt

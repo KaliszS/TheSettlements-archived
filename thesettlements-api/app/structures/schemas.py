@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 
-class Structure(BaseModel):
+
+class StructureBase(BaseModel):
     level: int | None = None
     type: str
     cost: int
