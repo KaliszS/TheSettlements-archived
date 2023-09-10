@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "thesettlements-api"
-version = "0.1.2"
+version = "0.1.3"
 description = "The Settlements multiplayer strategy game"
 authors = ["Sebastian Kalisz <sk.kaliszs@gmail.com>"]
 

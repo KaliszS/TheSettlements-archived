@@ -19,7 +19,7 @@ services:
             context: ./thesettlements-api
             dockerfile: Dockerfile
         image: thesettlements-backend
-        container_name: "The Settlements API"
+        container_name: The-Settlements-API
         command: uvicorn app.main:app --host 0.0.0.0 --port 80 --reload
         ports:
             - "8001:80"
@@ -29,10 +29,10 @@ services:
             - db
     db:
         image: neo4j:latest
-        container_name: "The Settlements DB"
+        container_name: The-Settlements-DB
         ports:
             - "7474:7474"
             - "7687:7687"
-        environment:
-            - NEO4J_AUTH=${USER}/${PASSWORD}
+        env_file: 
+            - ./thesettlements-api/.env
         
