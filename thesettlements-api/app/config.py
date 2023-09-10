@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     debug: bool = False
 
     # Database
-    neo4j_host: str = "db"
+    neo4j_host: str = "localhost"
     neo4j_port: str = "7687"
     neo4j_username: str = "neo4j"
     neo4j_password: SecretStr = SecretStr("password")

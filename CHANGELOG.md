@@ -1,5 +1,8 @@
 ## 0.1 - project refactor
 
+### [0.1.4] - 2023-09-10
+- make api connectable to neo4j
+
 ### [0.1.3] - 2023-09-09
 - `compose` scripts added and prepare refactored project to start within containers
 
