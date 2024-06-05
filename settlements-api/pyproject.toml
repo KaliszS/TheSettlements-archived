@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "settlements"
+version = "1.0"
+description = "The Settlements multiplayer strategy game"
+authors = ["Sebastian Kalisz <sk.kaliszs@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+uvicorn = "^0.30"
+fastapi = "^0.111"
+pydantic = "^2.7"
+pydantic-settings = "^2.2"
+sqlalchemy = "^2.0"
+psycopg = "^3.1"
+alembic = "^1.13"
+passlib = {extras = ["bcrypt"], version = "^1.7"}
+python-jose = {extras = ["cryptography"], version = "^3.3"}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2"
+pre-commit = "^3.7"
+factory-boy = "^3.3"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
