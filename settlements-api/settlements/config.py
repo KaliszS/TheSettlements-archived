@@ -11,11 +11,13 @@ class Settings(BaseSettings):
     environment: str = "dev"
     release: str = "dev"
     debug: bool = False
+    api_v1: str = "/api/v1"
+    api_latest: str = api_v1
 
     # Database
     pg_host: str = "localhost"
     pg_port: int = 5432
-    pg_database: str = "postgres"
+    pg_database: str = "settlements"
     pg_user: str = "user"
     pg_password: SecretStr = SecretStr("password")
 

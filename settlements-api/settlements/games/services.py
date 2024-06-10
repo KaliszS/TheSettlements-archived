@@ -19,6 +19,5 @@ class PlayerServices(AppServices[PlayerCrud, Player, PlayerCreate, PlayerUpdate]
     pass
 
 
-
 campaign_services = CampaignServices(CampaignCrud, Campaign)
 player_services = PlayerServices(PlayerCrud, Player)
