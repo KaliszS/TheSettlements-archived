@@ -9,7 +9,7 @@ type CreateSchemaType[schema: BaseModel] = schema
 type UpdateSchemaType[schema: BaseModel] = schema
 
 
-class CrudServices(ModelType, CreateSchemaType, UpdateSchemaType):
+class CrudServices[ModelType, CreateSchemaType, UpdateSchemaType]:
     def __init__(self, model: type[ModelType]):
         self.model = model
 
@@ -45,7 +45,7 @@ class CrudServices(ModelType, CreateSchemaType, UpdateSchemaType):
         return originator
 
 
-class AppServices[CrudModelType: CrudServices](CrudModelType, ModelType, CreateSchemaType, UpdateSchemaType):
+class AppServices[CrudModelType: CrudServices, ModelType, CreateSchemaType, UpdateSchemaType]:
     def __init__(self, crudModel: type[CrudModelType], model: type[ModelType]):
         self.crud = crudModel(model)
         self.name = self.crud.model.__name__.lower()

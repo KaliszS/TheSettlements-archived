@@ -14,4 +14,4 @@ async def root():
     return {"message": "Game engine is running!"}
 
 
-api.include_router(api_router, prefix=settings.api_latest, tags=["API v1"])
+api.include_router(api_router, prefix=settings.api_latest)
