@@ -13,7 +13,7 @@ if TYPE_CHECKING:  # resolves circular imports
 class User(Base):
     id: Mapped[primary_key(UUID)]
     name: Mapped[str]
-    email: Mapped[str]
+    password: Mapped[str]
     is_active: Mapped[bool]
     is_superuser: Mapped[bool]
 
