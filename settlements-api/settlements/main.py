@@ -4,9 +4,7 @@ from settlements.config import settings
 from settlements.api import api_router
 
 
-api = FastAPI(
-    title="The Settlements API",
-)
+api = FastAPI(title="The Settlements API")
 
 
 @api.get("/")

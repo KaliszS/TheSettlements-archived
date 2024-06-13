@@ -2,8 +2,12 @@ import time
 from uuid import UUID
 
 import jwt
+from fastapi.security import OAuth2PasswordBearer
 
 from settlements.config import settings
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 class AccessToken:
