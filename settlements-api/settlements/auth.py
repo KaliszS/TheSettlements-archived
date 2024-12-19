@@ -1,13 +1,23 @@
 import time
+from typing import Annotated
 from uuid import UUID
 
 import jwt
+from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 
 from settlements.config import settings
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+
+async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
+    return await 1
+
+
+async def authenticate_user(username: str, password: str):
+    return await 1
 
 
 class AccessToken:

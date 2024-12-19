@@ -1,6 +1,6 @@
 """init
 
-Revision ID: 66e3e069033d
+Revision ID: 0b1d89787bbc
 Revises:
 
 """
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision: str = "66e3e069033d"
+revision: str = "0b1d89787bbc"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -37,7 +37,7 @@ def upgrade() -> None:
         "users_user",
         sa.Column("id", sa.UUID(), nullable=False),
         sa.Column("name", sa.String(), nullable=False),
-        sa.Column("email", sa.String(), nullable=False),
+        sa.Column("password", sa.String(), nullable=False),
         sa.Column("is_active", sa.BOOLEAN(), nullable=False),
         sa.Column("is_superuser", sa.BOOLEAN(), nullable=False),
         sa.PrimaryKeyConstraint("id"),

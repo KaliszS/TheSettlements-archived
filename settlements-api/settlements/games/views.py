@@ -3,7 +3,14 @@ from uuid import UUID
 from fastapi import APIRouter, status
 
 from settlements.database import DbSession
-from settlements.games.schemas import CampaignCreate, CampaignRead, CampaignUpdate, PlayerCreate, PlayerRead, PlayerUpdate
+from settlements.games.schemas import (
+    CampaignCreate,
+    CampaignRead,
+    CampaignUpdate,
+    PlayerCreate,
+    PlayerRead,
+    PlayerUpdate,
+)
 from settlements.games.services import campaign_services, player_services
 
 
